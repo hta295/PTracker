@@ -1,0 +1,9 @@
+{% if interval_list %}
+    <ul>
+    {% for i in interval_list %}
+        <li>{{ i|stringformat:"s" }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No intervals are available.</p>
+{% endif %}
