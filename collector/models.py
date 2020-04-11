@@ -16,4 +16,5 @@ class Interval(models.Model):
         return self.end_time - self.start_time
 
     def __str__(self):
-        return f'{self.start_time} - {self.end_time}'
+        time_format = '%b %d, %Y, %I:%M:%S %p'
+        return f'{self.start_time.strftime(time_format)} - {self.end_time.strftime(time_format)}'
