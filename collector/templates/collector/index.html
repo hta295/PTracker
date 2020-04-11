@@ -1,9 +1,25 @@
+<!-- Template for collector index which contains the session user's submitted intervals -->
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'index/style.css' %}">
+
+<div class="title">
+  <h1>My Intervals</h1>
+</div>
+
+<div class="info">
+  <strong>Below is the list of intervals for this user. Each interval starts at some time and ends at some time,.</strong>
+</div>
+
 {% if interval_list %}
-    <ul>
-    {% for i in interval_list %}
-        <li>{{ i|stringformat:"s" }}</li>
-    {% endfor %}
-    </ul>
+    <div class="listitem">
+        <ul>
+        {% for i in interval_list %}
+            <li>{{ i|stringformat:"s" }}</li>
+        {% endfor %}
+        </ul>
+    </div>
 {% else %}
     <p>No intervals are available.</p>
 {% endif %}
