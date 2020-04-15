@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as lin
+from django.contrib.auth import logout as lout
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render
 from django.urls import reverse
@@ -20,3 +21,8 @@ def login(request):
     else:
         response = HttpResponse(status=401)
         return response
+
+
+def logout(request):
+    lout(request)
+    return HttpResponseRedirect(reverse('collector:index'))

@@ -23,5 +23,6 @@ urlpatterns = [
     # 'collector' app is the effective url root
     path('', include('collector.urls')),
     path('admin/', admin.site.urls),
-    path('login/', views.login)
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout')
 ]

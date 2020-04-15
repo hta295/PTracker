@@ -5,18 +5,18 @@
 <link rel="stylesheet" type="text/css" href="{% static 'login/style.css' %}">
 
 <div class="title">
-  <h1>Login</h1>
+    <h1>Login</h1>
 </div>
 
 <form method="post">
 {% csrf_token %}
-  <div class="container">
-    <label for="username"><b>Username</b></label>
-    <input type="text" placeholder="Username" name="username" required>
+    <div class="container">
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Username" name="username" required>
 
-    <label for="password"><b>Password</b></label>
-    <input type="password" placeholder="Password" name="password" required>
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Password" name="password" required>
 
-    <button type="submit">Login</button>
-  </div>
+        <button type="submit">Login</button>
+    </div>
 </form>

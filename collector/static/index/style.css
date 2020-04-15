@@ -1,16 +1,22 @@
 .info {
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 16px;
-  text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 16px;
+    text-align: center;
 }
 
 .listitem {
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 16px;
 }
 
 .title {
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 16px;
-  text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 16px;
+    text-align: center;
+}
+
+.logout {
+    position:fixed;
+    right:10px;
+    top:5px;
 }

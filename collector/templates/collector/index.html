@@ -5,11 +5,11 @@
 <link rel="stylesheet" type="text/css" href="{% static 'index/style.css' %}">
 
 <div class="title">
-  <h1>My Intervals</h1>
+    <h1>My Intervals</h1>
 </div>
 
 <div class="info">
-  <strong>Below is the list of intervals for this user. Each interval starts at some time and ends at some time,.</strong>
+    <strong>Below is the list of intervals for this user. Each interval starts at some time and ends at some time,.</strong>
 </div>
 
 {% if interval_list %}
@@ -23,3 +23,10 @@
 {% else %}
     <p>No intervals are available.</p>
 {% endif %}
+
+<form align="right" method="post" action="{% url 'logout' %}">
+{% csrf_token %}
+    <label class="logout">
+        <input type="submit" value="Logout">
+    </label>
+</form>
