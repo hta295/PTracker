@@ -20,7 +20,8 @@ from . import views
 
 
 urlpatterns = [
+    # 'collector' app is the effective url root
+    path('', include('collector.urls')),
     path('admin/', admin.site.urls),
-    path('collector/', include('collector.urls')),
     path('login/', views.login)
 ]
