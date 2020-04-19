@@ -12,6 +12,12 @@
     <strong>Below is the list of intervals for this user. Each interval starts at some time and ends at some time,.</strong>
 </div>
 
+<div class="edit-bar">
+    <ul>
+        <li><a href="{% url 'collector:add' %}">Add Work Interval</a></li>
+    </ul>
+</div>
+
 {% if interval_list %}
     <div class="listitem">
         <ul>
