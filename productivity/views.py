@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 def login(request):
     ip = request.META.get('REMOTE_ADDR')
     if request.method == 'GET':
-        return render(request, 'login/login.html')
+        return render(request, 'login.html')
     if 'username' not in request.POST or 'password' not in request.POST:
         logger.debug(f"Remote host ({ip}) tried to POST to login without 'username' or 'password'")
         return HttpResponseBadRequest('"username" and "password" must be supplied in login request')
@@ -32,8 +32,11 @@ def login(request):
 
 
 def logout(request):
-    lout(request)
-    ip = request.META.get('REMOTE_ADDR')
-    username = request.user.username if request.user.username else 'NOT AUTHENTICATED'
-    logger.debug(f"User ({username}) logged out of session from remote host ({ip})")
-    return HttpResponseRedirect(reverse('collector:index'))
+    if not request.user.is_authenticated:
+        return render(request, 'logout.html')
+    else:
+        lout(request)
+        ip = request.META.get('REMOTE_ADDR')
+        username = request.user.username
+        logger.debug(f"User ({username}) logged out of session from remote host ({ip})")
+        return HttpResponseRedirect(reverse('logout'))

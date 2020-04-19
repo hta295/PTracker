@@ -1,0 +1,10 @@
+<!-- Template for the logout page which is displayed if user is not authenticated -->
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+<div class="title">
+    <h1>Logged out</h1>
+    <h2><a href="{% url 'collector:index' %}">Back to Home</a></h2>
+</div>
