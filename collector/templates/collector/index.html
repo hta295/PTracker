@@ -8,14 +8,14 @@
     <h1>My Intervals</h1>
 </div>
 
-<div class="info">
-    <strong>Below is the list of intervals for this user. Each interval starts at some time and ends at some time,.</strong>
+<div class="navbar">
+    <a class="active" href="{% url 'collector:index' %}">Home</a>
+    <a href="{% url 'collector:add' %}">Add</a>
+    <a href="{% url 'logout' %}">Logout</a>
 </div>
 
-<div class="edit-bar">
-    <ul>
-        <li><a href="{% url 'collector:add' %}">Add Work Interval</a></li>
-    </ul>
+<div class="info">
+    <strong>Below is the list of intervals for this user. Each interval starts at some time and ends at some time,.</strong>
 </div>
 
 {% if interval_list %}
@@ -29,10 +29,3 @@
 {% else %}
     <p>No intervals are available.</p>
 {% endif %}
-
-<form align="right" method="post" action="{% url 'logout' %}">
-{% csrf_token %}
-    <label class="logout">
-        <input type="submit" value="Logout">
-    </label>
-</form>

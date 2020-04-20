@@ -8,6 +8,12 @@
     <h1>Add New Work Interval</h1>
 </div>
 
+<div class="navbar">
+    <a href="{% url 'collector:index' %}">Home</a>
+    <a class="active" href="{% url 'collector:add' %}">Add</a>
+    <a href="{% url 'logout' %}">Logout</a>
+</div>
+
 <div class="info">
     <strong>Below is the list of intervals for this user. Each interval starts at some time and ends at some time,.</strong>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
