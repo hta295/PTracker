@@ -7,20 +7,19 @@ from django.urls import reverse
 
 from .models import Interval
 from .utils import convert_intervals_from_utc_to_localtime
+from .utils import check_authentication as check_auth
 
 
+@check_auth
 def index(request):
-    if request.user.is_authenticated:
-        # TODO: Get tz from the user request.
-        # tzlocal() uses the TIME_ZONE from settings.py and not the end-user
-        intervals = convert_intervals_from_utc_to_localtime(tz.tzlocal(),
-                        request.user.interval_set.all().order_by('-start_time'))
-        return render(request, 'collector/index.html', {'interval_list': intervals})
-    else:
-        return HttpResponseRedirect('../login')
+    # TODO: Get tz from the user request.
+    # tzlocal() uses the TIME_ZONE from settings.py and not the end-user
+    intervals = convert_intervals_from_utc_to_localtime(tz.tzlocal(),
+                                                        request.user.interval_set.all().order_by('-start_time'))
+    return render(request, 'collector/index.html', {'interval_list': intervals})
 
 
-def validate_add(start, end):
+def _validate_add(start, end):
     """Validates new interval is valid and returns an error message if it is bad
 
     :param start: the start timestamp for the interval
@@ -38,6 +37,7 @@ def validate_add(start, end):
     return error_message
 
 
+@check_auth
 def add(request):
     """View for user to add a new Interval.
 
@@ -48,21 +48,18 @@ def add(request):
 
     :returns: appropriate HTTP response
     """
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            input_time_format = '%Y-%m-%dT%H:%M'
-            start = datetime.strptime(request.POST['start_time'], input_time_format)
-            end = datetime.strptime(request.POST['end_time'], input_time_format)
-            error_message = validate_add(start, end)
-            if not error_message:
-                # Add interval and redirect to index
-                i = Interval(user=request.user, start_time=start, end_time=end)
-                i.save()
-                return HttpResponseRedirect(reverse('collector:index'))
-            else:
-                # Show page again with an error
-                return render(request, 'collector/add.html', {'error_message': error_message})
+    if request.method == 'POST':
+        input_time_format = '%Y-%m-%dT%H:%M'
+        start = datetime.strptime(request.POST['start_time'], input_time_format)
+        end = datetime.strptime(request.POST['end_time'], input_time_format)
+        error_message = _validate_add(start, end)
+        if not error_message:
+            # Add interval and redirect to index
+            i = Interval(user=request.user, start_time=start, end_time=end)
+            i.save()
+            return HttpResponseRedirect(reverse('collector:index'))
         else:
-            return render(request, 'collector/add.html')
+            # Show page again with an error
+            return render(request, 'collector/add.html', {'error_message': error_message})
     else:
-        return HttpResponseRedirect('../login')
+        return render(request, 'collector/add.html')

@@ -7,7 +7,7 @@ from django.test import TestCase
 from django.utils import timezone
 
 from .models import Interval, User
-from .utils import convert_intervals_from_utc_to_localtime
+from .utils import convert_intervals_from_utc_to_localtime, check_authentication
 
 
 class IntervalModelTests(TestCase):
@@ -45,3 +45,27 @@ class UtilTests(TestCase):
         for (expected_start, expected_end, converted) in zip(expected_starts, expected_ends, converted_intervals):
             self.assertEqual(expected_start.timetuple()[:8], converted.start_time.timetuple()[:8])
             self.assertEqual(expected_end.timetuple()[:8], converted.end_time.timetuple()[:8])
+
+    def test_check_authentication_true(self):
+        def foo(request):
+            response = MagicMock()
+            response.status_code = 200
+            return response
+
+        decorated_foo = check_authentication(foo)
+        mock_request = MagicMock()
+        mock_request.user.is_authenticated = True
+        response = decorated_foo(mock_request)
+        self.assertEqual(response.status_code, 200)
+
+    def test_check_authentication_false_is_redirected(self):
+        def foo(request):
+            response = MagicMock()
+            response.status_code = 200
+            return response
+
+        decorated_foo = check_authentication(foo)
+        mock_request = MagicMock()
+        mock_request.user.is_authenticated = False
+        response = decorated_foo(mock_request)
+        self.assertGreaterEqual(response.status_code, 302)

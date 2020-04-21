@@ -1,6 +1,7 @@
 from dateutil import tz
 
-from .models import Interval
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 def convert_intervals_from_utc_to_localtime(local_tz, intervals):
@@ -17,3 +18,17 @@ def convert_intervals_from_utc_to_localtime(local_tz, intervals):
         i.start_time = i.start_time.replace(tzinfo=from_tz).astimezone(local_tz)
         i.end_time = i.end_time.replace(tzinfo=from_tz).astimezone(local_tz)
     return intervals
+
+
+def check_authentication(func):
+    """Function decorator that checks if user is authenticated and redirects them to login page if not
+
+    Use for functions that require authentication
+
+    :param func: the function to decorate
+    :returns: the decorated function
+    """
+    def decorated_func(request):
+        return func(request) if request.user.is_authenticated else HttpResponseRedirect(reverse('login'))
+
+    return decorated_func
