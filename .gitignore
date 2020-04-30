@@ -3,4 +3,4 @@
 db.*
 .idea
 __pycache__
-
+.pip_cache

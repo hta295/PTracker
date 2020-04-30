@@ -1,0 +1,4 @@
+127.0.0.1 - - [29/Apr/2020:23:57:52 -0700] "GET / HTTP/1.1" 302 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36"
+127.0.0.1 - - [29/Apr/2020:23:57:53 -0700] "GET /login/ HTTP/1.1" 200 704 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36"
+127.0.0.1 - - [29/Apr/2020:23:57:53 -0700] "GET /static/authentication/style.css HTTP/1.1" 200 607 "http://127.0.0.1:8000/login/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36"
+127.0.0.1 - - [29/Apr/2020:23:57:53 -0700] "GET /login/ HTTP/1.1" 200 704 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36"
