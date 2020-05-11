@@ -1,0 +1,35 @@
+# ptracker web server with onboard SQLite database
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ptracker
+  name: ptracker-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8000
+      targetPort: 80
+  selector:
+    app: ptracker
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ptracker
+  labels:
+    app: ptracker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ptracker
+  template:
+    metadata:
+      labels:
+        app: ptracker
+    spec:
+      containers:
+        - name: ptracker
+          image: gcr.io/ptracker-276403/ptracker:v0.0.2
